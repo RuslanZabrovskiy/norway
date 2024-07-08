@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -27,7 +30,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 40px; /* Фиксированное расстояние от контейнера с фразами */
+            margin-top: 20px; /* Фиксированное расстояние от контейнера с фразами */
         }
         #next-phrase-button, #copy-phrase-button {
             font-size: 18px;
@@ -42,7 +45,7 @@
     <div id="phrase-container">Нажмите кнопку для начала!</div>
     <div class="button-container">
         <button id="copy-phrase-button">Копировать текст</button>
-        <button id="next-phrase-button">Следующая фраза</button>
+        <button id="next-phrase-button">Следующий шаг!!!</button>
     </div>
 
     <script>
@@ -1140,7 +1143,8 @@
     { "ru": "Я не приношу еду на вечеринку.", "no": "Jeg bringer ikke mat til festen." },
     { "ru": "Ты не наслаждаешься летом.", "no": "Du trives ikke om sommeren." },
     { "ru": "Он не разговаривает с учителем.", "no": "Han prater ikke med læreren." },
-    { "ru": "Она не считает до десяти.", "no": "Hun teller ikke til ti." }            ];
+    { "ru": "Она не считает до десяти.", "no": "Hun teller ikke til ti." }
+            ];
 
             let currentIndex = -1; // Индекс текущей фразы
             let showRussian = true; // Переменная для отслеживания текущего состояния
@@ -1158,7 +1162,7 @@
 
             // Функция для копирования текста
             function copyText() {
-                const textToCopy = document.getElementById('phrase-container').innerText;
+                const textToCopy = phrases[currentIndex].no;
                 navigator.clipboard.writeText(textToCopy).catch(err => {
                     console.error('Ошибка при копировании текста: ', err);
                 });
