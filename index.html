@@ -18,17 +18,32 @@
             font-size: 24px;
             margin-bottom: 20px;
             text-align: center;
+            height: 60px; /* Фиксированная высота для контейнера с фразами */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        #next-phrase-button {
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px; /* Фиксированное расстояние от контейнера с фразами */
+        }
+        #next-phrase-button, #copy-phrase-button {
             font-size: 18px;
             padding: 10px 20px;
             cursor: pointer;
+            margin-top: 10px;
+            width: 200px; /* Устанавливаем одинаковую ширину */
         }
     </style>
 </head>
 <body>
     <div id="phrase-container">Нажмите кнопку для начала!</div>
-    <button id="next-phrase-button">Следующая фраза</button>
+    <div class="button-container">
+        <button id="copy-phrase-button">Копировать текст</button>
+        <button id="next-phrase-button">Следующая фраза</button>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
@@ -1125,8 +1140,7 @@
     { "ru": "Я не приношу еду на вечеринку.", "no": "Jeg bringer ikke mat til festen." },
     { "ru": "Ты не наслаждаешься летом.", "no": "Du trives ikke om sommeren." },
     { "ru": "Он не разговаривает с учителем.", "no": "Han prater ikke med læreren." },
-    { "ru": "Она не считает до десяти.", "no": "Hun teller ikke til ti." }
-];
+    { "ru": "Она не считает до десяти.", "no": "Hun teller ikke til ti." }            ];
 
             let currentIndex = -1; // Индекс текущей фразы
             let showRussian = true; // Переменная для отслеживания текущего состояния
@@ -1142,8 +1156,19 @@
                 showRussian = !showRussian;
             }
 
+            // Функция для копирования текста
+            function copyText() {
+                const textToCopy = document.getElementById('phrase-container').innerText;
+                navigator.clipboard.writeText(textToCopy).catch(err => {
+                    console.error('Ошибка при копировании текста: ', err);
+                });
+            }
+
             // Обработчик клика по кнопке для отображения следующей фразы
             document.getElementById('next-phrase-button').addEventListener('click', displayNextPhrase);
+
+            // Обработчик клика по кнопке для копирования текста
+            document.getElementById('copy-phrase-button').addEventListener('click', copyText);
 
             // При загрузке страницы отображаем первую русскую фразу
             displayNextPhrase();
